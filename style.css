@@ -1,0 +1,45 @@
+#root {
+  width: 400px;
+  margin: auto;
+  margin-top: 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 20px;
+}
+h1 {
+  text-align: center;
+}
+
+.pending{
+    background-color: white;
+}
+
+.complete{
+    background-color: rgb(232, 232, 232);
+    text-decoration: line-through;
+}
+form {
+  margin: 10px 10px 10px 10px;
+  text-align: center;
+}
+form input {
+  border: 2px solid black;
+  width: 310px;
+}
+.task {
+  text-justify: auto;
+  font-size: larger;
+  margin-left: 20px;
+  margin-bottom: 2px;
+}
+
+.taskList div {
+  width: 350px;
+}
+.taskList div input {
+  float: right;
+}
+
+.extraButton {
+    margin-top: 20px;
+  text-align: center;
+}
