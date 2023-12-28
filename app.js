@@ -9,7 +9,7 @@ const allTask = [];
 
 textBox.focus();
 
-const createTaskCard = (text, complete) => {
+const createTaskCard = (text, complete, key) => {
   const card = document.createElement("div");
   card.className = "task";
   if (complete) card.classList.add("complete");
@@ -20,7 +20,7 @@ const createTaskCard = (text, complete) => {
   const ckbox = document.createElement("input");
   ckbox.type = "checkbox";
   ckbox.checked = complete;
-  ckbox.id = text;
+  ckbox.id = key;
   ckbox.onchange = changeCardColor;
   card.appendChild(ckbox);
 
@@ -30,14 +30,16 @@ const createTaskCard = (text, complete) => {
 const populate = (...Arr) => {
   taskList.innerHTML = "";
   Arr.forEach((child) => {
-    taskList.appendChild(createTaskCard(child.task, child.completed));
+    taskList.appendChild(
+      createTaskCard(child.task, child.completed, child.key)
+    );
   });
 };
 
 addButton.onclick = (e) => {
   e.preventDefault();
   if (textBox.value !== "") {
-    const newtask = { task: textBox.value, completed: false };
+    const newtask = { task: textBox.value, completed: false, key: Date.now() };
     allTask.push(newtask);
   }
   textBox.value = "";
@@ -46,7 +48,7 @@ addButton.onclick = (e) => {
 
 const changeCardColor = (event) => {
   allTask.forEach((val) => {
-    if (val.task === event.target.id) {
+    if (val.key == event.target.id) {
       if (val.completed === false) val.completed = true;
       else val.completed = false;
     }
