@@ -35,7 +35,9 @@ let changeCardColor = () => {
 
 addButton.onclick = (e) => {
   e.preventDefault();
-  task_list.appendChild(newTaskCard(textBox.value));
+  if (textBox.value !== "") {
+    task_list.appendChild(newTaskCard(textBox.value));
+  }
   textBox.value = "";
 };
 
