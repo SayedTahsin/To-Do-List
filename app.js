@@ -1,73 +1,76 @@
 const textBox = document.querySelector("#text-box");
 const addButton = document.querySelector("#addBtn");
-const task_list = document.querySelector(".taskList");
+const taskList = document.querySelector(".taskList");
 const allTaskButton = document.querySelector("#all");
 const completedTaskButton = document.querySelector("#completed");
 const pendingTaskButton = document.querySelector("#pending");
 
 textBox.focus();
 
-let newTaskCard = (text) => {
-  let card = document.createElement("div");
+const newTaskCard = (text) => {
+  const card = document.createElement("div");
   card.className = "task pending";
 
   card.appendChild(document.createTextNode(text));
 
-  let ckbox = document.createElement("input");
+  const ckbox = document.createElement("input");
   ckbox.type = "checkbox";
   ckbox.onchange = changeCardColor;
   card.appendChild(ckbox);
 
   return card;
 };
-let changeCardColor = () => {
-  let children = task_list.querySelectorAll(".task");
-  for (let i = 0; i < children.length; i++) {
-    if (children[i].querySelector("input").checked) {
-      children[i].classList.add("complete");
-      children[i].classList.remove("pending");
+const changeCardColor = () => {
+  const children = taskList.querySelectorAll(".task");
+
+  children.forEach((child) => {
+    if (child.querySelector("input").checked) {
+      child.classList.add("complete");
+      child.classList.remove("pending");
     } else {
-      children[i].classList.remove("complete");
-      children[i].classList.add("pending");
+      child.classList.remove("complete");
+      child.classList.add("pending");
     }
-  }
+  });
 };
 
 addButton.onclick = (e) => {
   e.preventDefault();
   if (textBox.value !== "") {
-    task_list.appendChild(newTaskCard(textBox.value));
+    taskList.appendChild(newTaskCard(textBox.value));
   }
   textBox.value = "";
 };
 
-let showAllTask = () => {
-  let children = task_list.querySelectorAll(".task");
-  for (let i = 0; i < children.length; i++) {
-    children[i].style.display = "block";
-  }
+const showAllTask = () => {
+  const children = taskList.querySelectorAll(".task");
+
+  children.forEach((child) => {
+    child.style.display = "block";
+  });
 };
 
-let showPendingTask = () => {
-  let children = task_list.querySelectorAll(".task");
-  for (let i = 0; i < children.length; i++) {
-    if (children[i].querySelector("input").checked) {
-      children[i].style.display = "none";
+const showPendingTask = () => {
+  const children = taskList.querySelectorAll(".task");
+
+  children.forEach((child) => {
+    if (child.querySelector("input").checked) {
+      child.style.display = "none";
     } else {
-      children[i].style.display = "block";
+      child.style.display = "block";
     }
-  }
+  });
 };
 
-let showCompletedTask = () => {
-  let children = task_list.querySelectorAll(".task");
-  for (let i = 0; i < children.length; i++) {
-    if (!children[i].querySelector("input").checked) {
-      children[i].style.display = "none";
+const showCompletedTask = () => {
+  const children = taskList.querySelectorAll(".task");
+  children.forEach((child) => {
+    if (!child.querySelector("input").checked) {
+      child.style.display = "none";
     } else {
-      children[i].style.display = "block";
+      child.style.display = "block";
     }
-  }
+  });
 };
 
 allTaskButton.onclick = (e) => {
