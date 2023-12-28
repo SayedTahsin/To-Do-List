@@ -6,7 +6,7 @@ const completedTaskButton = document.querySelector("#completed");
 const pendingTaskButton = document.querySelector("#pending");
 
 const allTask = [];
-
+let page = 1;
 textBox.focus();
 
 const createTaskCard = (text, complete, key) => {
@@ -42,8 +42,15 @@ addButton.onclick = (e) => {
     const newtask = { task: textBox.value, completed: false, key: Date.now() };
     allTask.push(newtask);
   }
+  
   textBox.value = "";
-  populate(...allTask);
+  if (page == 1) {
+    populate(...allTask);
+  } else if (page == 2) {
+    showCompletedTask();
+  } else {
+    showPendingTask();
+  }
 };
 
 const changeCardColor = (event) => {
@@ -53,18 +60,27 @@ const changeCardColor = (event) => {
       else val.completed = false;
     }
   });
-  populate(...allTask);
+  if (page == 1) {
+    populate(...allTask);
+  } else if (page == 2) {
+    showCompletedTask();
+  } else {
+    showPendingTask();
+  }
 };
 
 const showAllTask = () => {
+  page = 1;
   populate(...allTask);
 };
 const showPendingTask = () => {
+  page = 3;
   const res = allTask.filter(negative);
   populate(...res);
 };
 
 const showCompletedTask = () => {
+  page = 2;
   const res = allTask.filter(positive);
   populate(...res);
 };
